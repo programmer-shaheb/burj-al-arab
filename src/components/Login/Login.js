@@ -12,16 +12,15 @@ const Login = () => {
   } else {
     firebase.app(); // if already initialized, use that one
   }
+  const history = useHistory();
+  const location = useLocation();
+
+  const { from } = location.state || { from: { pathname: "/" } };
   const [isLoogedIn, setIsLoogedIn] = useContext(userContext);
 
   const provider = new firebase.auth.GoogleAuthProvider();
 
   const [users, setUsers] = useState("");
-
-  const history = useHistory();
-  const location = useLocation();
-
-  const { from } = location.state || { from: { pathname: "/" } };
 
   const googleHandler = () => {
     firebase
@@ -42,7 +41,6 @@ const Login = () => {
 
   return (
     <div>
-      <h1>This is {users.displayName} </h1>
       <Button onClick={googleHandler} variant="contained" color="primary">
         Sign Up With Google
       </Button>
